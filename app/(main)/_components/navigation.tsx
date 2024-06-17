@@ -2,18 +2,21 @@
 
 import {cn} from "@/lib/utils";
 import React, {ElementRef, useEffect, useRef, useState} from "react";
-import {usePathname} from "next/navigation";
+import {useParams, usePathname, useRouter} from "next/navigation";
 import {useMediaQuery} from "usehooks-ts";
-import {ChevronsLeft, MenuIcon, PlusCircleIcon, SearchIcon, SettingsIcon} from "lucide-react";
+import {ChevronsLeft, HomeIcon, MenuIcon, PlusCircleIcon, SearchIcon, SettingsIcon} from "lucide-react";
 import {UserItem} from "@/app/(main)/_components/user-item";
 import {api} from "@/convex/_generated/api";
 import {useMutation} from "convex/react";
 import Item from "@/app/(main)/_components/item";
 import {toast} from "sonner";
 import DocumentList from "@/app/(main)/_components/documnet-list";
+import Navbar from "@/app/(main)/_components/navbar";
 
 export const Navigation = () => {
     const pathname = usePathname();
+    const params = useParams();
+    const router = useRouter();
     const create = useMutation(api.documents.create)
     const isMobile = useMediaQuery("(max-width: 768px)");
 
@@ -36,6 +39,10 @@ export const Navigation = () => {
             collapse();
         }
     }, [pathname, isMobile])
+
+    const onRedirectHome = () => {
+        router.push(`/documents`)
+    }
 
     const handleMouseMove = (event: MouseEvent) => {
         if (!isResizingRef.current) return;
@@ -132,6 +139,11 @@ export const Navigation = () => {
                         }}
                     />
                     <Item
+                        label="Home"
+                        icon={HomeIcon}
+                        onClick={onRedirectHome}
+                    />
+                    <Item
                         label="Settigns"
                         icon={SettingsIcon}
                         onClick={() => {
@@ -145,7 +157,7 @@ export const Navigation = () => {
                 </div>
                 <span className="text-sm pt-4 pl-4 text-muted-foreground">Private</span>
                 <div className="mt-4">
-                    <DocumentList />
+                    <DocumentList/>
                 </div>
                 <div
                     onMouseDown={handleMouseDown}
@@ -162,10 +174,18 @@ export const Navigation = () => {
                     isMobile && "left-0 w-full"
                 )}
             >
-                <nav className="bg-transparent px-3 py-2 w-full">
-                    {isCollapsed &&
-                        <MenuIcon onClick={resetWith} role="button" className="h-6 w-6 text-muted-foreground"/>}
-                </nav>
+                {!!params.documentId ? (
+                    <Navbar
+                        isCollapsed={isCollapsed}
+                        onResetWidth={resetWith}
+                    />
+                ) : (
+                    <nav className="bg-transparent px-3 py-2 w-full">
+                        {isCollapsed &&
+                            <MenuIcon onClick={resetWith} role="button" className="h-6 w-6 text-muted-foreground"/>}
+                    </nav>
+                )}
+
             </div>
         </>
     );
