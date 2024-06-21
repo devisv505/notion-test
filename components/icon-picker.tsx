@@ -2,11 +2,12 @@
 
 import React from "react";
 import {useTheme} from "next-themes";
-import EmojiPicker, {Theme} from "emoji-picker-react";
+import EmojiPicker, {Categories, Theme} from "emoji-picker-react";
 import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover";
 import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Button} from "@/components/ui/button";
 import {XIcon} from "lucide-react";
+import {Suggested} from "emoji-picker-react/src/components/body/Suggested";
 
 interface IconPickerProps {
     onChange: (icon: string) => void;
@@ -26,8 +27,10 @@ const IconPicker = ({onChange, onDelete, children, asChild}: IconPickerProps) =>
 
     return (
         <Popover>
-            <PopoverTrigger asChild={asChild} className="cursor-pointer">
-                {children}
+            <PopoverTrigger asChild={asChild}>
+                <div className="cursor-pointer">
+                    {children}
+                </div>
             </PopoverTrigger>
             <PopoverContent className="p-0 w-full">
 
@@ -48,6 +51,7 @@ const IconPicker = ({onChange, onDelete, children, asChild}: IconPickerProps) =>
                             height={350}
                             theme={theme}
                             onEmojiClick={(data) => onChange(data.emoji)}
+                            skinTonesDisabled
                         />
                     </TabsContent>
                     {/*<TabsContent value="password">Change your password here.</TabsContent>*/}

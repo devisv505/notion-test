@@ -78,7 +78,7 @@ const Toolbar = ({initialData, preview}: Toolbar) => {
                         onDelete={onRemoveIcon}
                         asChild
                     >
-                        <p className="text-6xl hover:opacity-65 transition">
+                        <p className="text-6xl hover:opacity-65 transition absolute top-[-30px]">
                             {initialData.icon}
                         </p>
                     </IconPicker>
