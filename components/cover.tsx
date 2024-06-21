@@ -11,6 +11,7 @@ import {useParams} from "next/navigation";
 import {Id} from "@/convex/_generated/dataModel";
 import {useEdgeStore} from "@/lib/edgestore";
 import {Skeleton} from "@/components/ui/skeleton";
+import {useMediaQuery} from "usehooks-ts";
 
 interface CoverProps {
     url?: string;
@@ -19,6 +20,7 @@ interface CoverProps {
 
 export const Cover = ({url, preview}: CoverProps) => {
     const params = useParams();
+    const isMobile = useMediaQuery("(max-width: 768px)");
     const {edgestore} = useEdgeStore()
     const coverImage = useCoverImage()
     const removeCoverImage = useMutation(api.documents.removeCoverImage);
@@ -50,7 +52,10 @@ export const Cover = ({url, preview}: CoverProps) => {
                 />
             )}
             {url && !preview && (
-                <div className="opacity-0 group-hover:opacity-100 absolute bottom-5 right-5 flex items-center gap-x-2">
+                <div className={cn(
+                    "absolute bottom-5 right-5 flex items-center gap-x-2",
+                    !isMobile && "opacity-0 group-hover:opacity-100 transition"
+                )}>
                     <Button
                         onClick={() => coverImage.onReplace(url)}
                         className="text-muted-foreground text-xs"

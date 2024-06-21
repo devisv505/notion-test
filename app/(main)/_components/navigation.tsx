@@ -52,9 +52,9 @@ export const Navigation = () => {
         if (newWith > 480) newWith = 480;
 
         if (sidebarRef.current && navbarRef.current) {
-            sidebarRef.current.style.width = `${newWith}px`;
+            sidebarRef.current.style.minWidth = `${newWith}px`;
             navbarRef.current.style.setProperty("left", `${newWith}px`);
-            navbarRef.current.style.setProperty("width", `calc(100% - ${newWith}px)`);
+            navbarRef.current.style.setProperty("width", `calc(100%)`);
         }
     }
 
@@ -78,7 +78,7 @@ export const Navigation = () => {
             setIsCollapsed(false);
             setIsResetting(true);
 
-            sidebarRef.current.style.width = isMobile ? "100%" : "240px";
+            sidebarRef.current.style.minWidth = isMobile ? "100%" : "240px";
             navbarRef.current.style.setProperty("with", isMobile ? "0" : "calc(100% - 240px)");
             navbarRef.current.style.setProperty("left", isMobile ? "100%" : "240px");
 
@@ -91,7 +91,8 @@ export const Navigation = () => {
             setIsCollapsed(true);
             setIsResetting(true);
 
-            sidebarRef.current.style.width = "0";
+            sidebarRef.current.style.minWidth = "0";
+            sidebarRef.current.style.maxWidth = "0";
             navbarRef.current.style.setProperty("with", "100%");
             navbarRef.current.style.setProperty("left", "0");
 
@@ -114,9 +115,9 @@ export const Navigation = () => {
             <aside
                 ref={sidebarRef}
                 className={cn(
-                    "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[99999]",
+                    "group/sidebar h-full bg-secondary overflow-y-auto relative flex w-60 flex-col z-[100]",
                     isResetting && "transition-all ease-in-out duration-300",
-                    isMobile && "w-0"
+                    // isMobile && "min-w-full"
                 )}
             >
                 <div
@@ -159,19 +160,22 @@ export const Navigation = () => {
                 <div className="mt-4">
                     <DocumentList/>
                 </div>
-                <div
-                    onMouseDown={handleMouseDown}
-                    onClick={resetWith}
-                    className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1
+                {!isMobile && (
+                    <div
+                        onMouseDown={handleMouseDown}
+                        onClick={resetWith}
+                        className="opacity-0 group-hover/sidebar:opacity-100 transition cursor-ew-resize absolute h-full w-1
                         bg-primary/10 right-0 top-0"
-                />
+                    />
+                )}
             </aside>
             <div
                 ref={navbarRef}
                 className={cn(
-                    "absolute top-0 z-[99999] left-60 w-[calc(100%-240px)]",
+                    "absolute top-0 z-[99999]",
                     isResetting && "transition-all ease-in-out duration-300",
-                    isMobile && "left-0 w-full"
+                    isMobile && "left-0 w-full",
+                    !isMobile && "left-60 w-[calc(100%)]"
                 )}
             >
                 {!!params.documentId ? (

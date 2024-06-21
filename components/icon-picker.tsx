@@ -22,15 +22,20 @@ const IconPicker = ({onChange, children, asChild}: IconPickerProps) => {
 
     return (
         <Popover>
-            <PopoverTrigger asChild={asChild}>
+            <PopoverTrigger asChild={asChild} className="cursor-pointer">
                 {children}
             </PopoverTrigger>
-            <PopoverContent className="p-0 w-full border-none shadow-none">
-                <EmojiPicker
-                    height={350}
-                    theme={theme}
-                    onEmojiClick={(data) => onChange(data.emoji)}
-                />
+            <PopoverContent className="p-0 w-full">
+                test
+
+                <div className="emoji-picker-wrapper rounded-none border-none shadow-none">
+                    <EmojiPicker
+                        height={350}
+                        theme={theme}
+                        onEmojiClick={(data) => onChange(data.emoji)}
+                        className="rounded-none border-none shadow-none"
+                    />
+                </div>
             </PopoverContent>
         </Popover>
     );
