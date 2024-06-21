@@ -81,3 +81,8 @@ body,
         @apply bg-background text-foreground;
     }
 }
+
+.EmojiPickerReact {
+    border: none !important;
+    width: 100% !important;
+}
