@@ -30,6 +30,7 @@ export const Alert = createReactBlockSpec(
                             props: {type: value || "warning"}
                         })
                     }}
+                    editable={props.editor.isEditable}
                     currentType={props.block.props.type}
                 >
                     <div className={"inline-content"} ref={props.contentRef}/>

@@ -8,8 +8,9 @@ import {AlertType} from "@/components/blocks/alerts";
 
 interface AlertBlockProps {
     onUpdate: (value: AlertType) => void;
-    currentType: string,
+    currentType: string;
     children: React.ReactNode;
+    editable: boolean;
 }
 
 export const alertTypes = [
@@ -55,7 +56,7 @@ export const alertTypes = [
     },
 ] as const;
 
-const AlertSelect = ({onUpdate, currentType, children}: AlertBlockProps) => {
+const AlertSelect = ({onUpdate, currentType, children, editable}: AlertBlockProps) => {
     const {resolvedTheme} = useTheme();
     const alertType = alertTypes.find(
         (a) => a.value === currentType
@@ -70,45 +71,59 @@ const AlertSelect = ({onUpdate, currentType, children}: AlertBlockProps) => {
             )}
             style={{color: `${alertType.color}`, background: bg}}
         >
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                    <Button
-                        style={{color: `${alertType.color}`, background: bg}}
-                        onClick={() => {
-                        }}
-                        className="text-muted-foreground text-xs border-none"
-                        variant="outline"
-                        size="sm"
-                    >
-                        <alertType.icon/>
-                    </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent
-                    align="start"
-                    alignOffset={11}
-                    forceMount
-                >
-                    {alertTypes.map((type) => {
 
-                            return (
-                                <DropdownMenuItem
-                                    key={type.value}
-                                    className="w-full cursor-pointer text-muted-foreground outline-none focus:outline-none"
-                                    onClick={(e) => {
-                                        onUpdate(type.value)
-                                    }}
-                                >
-                                    <type.icon
-                                        className="w-4 h-4 mr-2"
-                                        style={{color: `${type.color}`}}
-                                    />
-                                    {type.title}
-                                </DropdownMenuItem>
-                            );
-                        }
-                    )}
-                </DropdownMenuContent>
-            </DropdownMenu>
+            {editable ? (
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                        <Button
+                            style={{color: `${alertType.color}`, background: bg}}
+                            onClick={() => {
+                            }}
+                            className="text-muted-foreground text-xs border-none"
+                            variant="outline"
+                            size="sm"
+                        >
+                            <alertType.icon/>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent
+                        align="start"
+                        alignOffset={11}
+                        forceMount
+                    >
+                        {alertTypes.map((type) => {
+
+                                return (
+                                    <DropdownMenuItem
+                                        key={type.value}
+                                        className="w-full cursor-pointer text-muted-foreground outline-none focus:outline-none"
+                                        onClick={(e) => {
+                                            onUpdate(type.value)
+                                        }}
+                                    >
+                                        <type.icon
+                                            className="w-4 h-4 mr-2"
+                                            style={{color: `${type.color}`}}
+                                        />
+                                        {type.title}
+                                    </DropdownMenuItem>
+                                );
+                            }
+                        )}
+                    </DropdownMenuContent>
+                </DropdownMenu>
+            ) : (
+                <Button
+                    style={{color: `${alertType.color}`, background: bg}}
+                    className="text-muted-foreground text-xs border-none"
+                    variant="outline"
+                    size="sm"
+                    disabled
+                >
+                    <alertType.icon/>
+                </Button>
+            )}
+
             {children}
         </div>
     );

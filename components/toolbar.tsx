@@ -84,9 +84,11 @@ const Toolbar = ({initialData, preview}: Toolbar) => {
                 </div>
             )}
             {!!initialData.icon && preview && (
-                <p className="text-6xl pt-6">
-                    {initialData.icon}
-                </p>
+                <div className="h-6">
+                    <p className="text-6xl pt-6 absolute top-[-54px]">
+                        {initialData.icon}
+                    </p>
+                </div>
             )}
             <div className={cn(
                 "flex items-center gap-x-1 py-4",
