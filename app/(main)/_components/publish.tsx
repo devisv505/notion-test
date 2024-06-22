@@ -82,7 +82,7 @@ export const Publish = ({initialData}: PublishProps) => {
                 {initialData.isPublished ? (
                     <div className="space-y-4">
                         <div className="flex items-center gap-x-2">
-                            <GlobeIcon className="h-4 w-4 text-sky-500 mb-2"/>
+                            <GlobeIcon className="h-4 w-4 text-sky-500"/>
                             <p className="text-xs font-medium text-sky-500">
                                 This note is live on web.
                             </p>
