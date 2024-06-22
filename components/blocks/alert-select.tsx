@@ -66,8 +66,7 @@ const AlertSelect = ({onUpdate, currentType, children}: AlertBlockProps) => {
     return (
         <div
             className={cn(
-                "flex justify-start gap-x-2 items-center flex-grow-[1] border-2 rounded-md p-2",
-                `bg-[${alertType.backgroundColor.light}] dark:bg-[${alertType.backgroundColor.dark}]`
+                "flex justify-start gap-x-2 items-center flex-grow-[1] border rounded-md p-2",
             )}
             style={{color: `${alertType.color}`, background: bg}}
         >
@@ -94,11 +93,15 @@ const AlertSelect = ({onUpdate, currentType, children}: AlertBlockProps) => {
                             return (
                                 <DropdownMenuItem
                                     key={type.value}
-                                    className="w-full cursor-pointer text-muted-foreground outline-none"
+                                    className="w-full cursor-pointer text-muted-foreground outline-none focus:outline-none"
                                     onClick={(e) => {
                                         onUpdate(type.value)
                                     }}
                                 >
+                                    <type.icon
+                                        className="w-4 h-4 mr-2"
+                                        style={{color: `${type.color}`}}
+                                    />
                                     {type.title}
                                 </DropdownMenuItem>
                             );

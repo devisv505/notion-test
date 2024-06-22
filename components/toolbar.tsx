@@ -63,7 +63,6 @@ const Toolbar = ({initialData, preview}: Toolbar) => {
     }
 
     const onRemoveIcon = () => {
-        console.log("RRRR");
         removeIcon({
             id: initialData._id
         })

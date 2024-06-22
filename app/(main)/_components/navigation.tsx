@@ -102,6 +102,7 @@ export const Navigation = () => {
 
     const handleCreate = () => {
         const promise = create({title: "Undefined"})
+            .then((documentId) => { router.push(`/documents/${documentId}`) });
 
         toast.promise(promise, {
             loading: "Creating a new note...",

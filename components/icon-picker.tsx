@@ -46,7 +46,7 @@ const IconPicker = ({onChange, onDelete, children, asChild}: IconPickerProps) =>
                         </Button>
                         {/*<TabsTrigger value="password">Password</TabsTrigger>*/}
                     </TabsList>
-                    <TabsContent value="empjis" className="flex items-center justify-center p-0 m-0">
+                    <TabsContent value="empjis" className="flex items-center justify-center p-0 m-0 pb-2">
                         <EmojiPicker
                             height={350}
                             theme={theme}

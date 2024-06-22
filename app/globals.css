@@ -86,3 +86,11 @@ body,
     border: none !important;
     width: 100% !important;
 }
+
+#epr-category-nav-id {
+    display: none !important;
+}
+
+aside.EmojiPickerReact > div:last-child {
+    display: none !important;
+}
