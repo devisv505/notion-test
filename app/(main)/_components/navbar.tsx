@@ -28,6 +28,7 @@ const Navbar = ({isCollapsed, onResetWidth}: NavbarProps) => {
     if (document === null) {
         return null;
     }
+    const percentage = 70;
 
     return (
         <>
@@ -43,9 +44,15 @@ const Navbar = ({isCollapsed, onResetWidth}: NavbarProps) => {
                 )}
                 <div className="flex items-center justify-between w-full">
                     <Title initialData={document}/>
-                    <div className="flex items-center gap-x-2">
-                        <Publish initialData = {document} />
-                    </div>
+                    {/*<div className="flex items-center gap-x-2">*/}
+                    {/*    <div className="donut-loader w-6 h-6">*/}
+                    {/*        <div className="circle-background"></div>*/}
+                    {/*        <div className="circle-background2 bg-background dark:bg-[#1F1F1F]"></div>*/}
+                    {/*        <div className="circle-progress" style={{'--percentage': percentage}}></div>*/}
+                    {/*    </div>*/}
+
+                    {/*    <Publish initialData={document}/>*/}
+                    {/*</div>*/}
                 </div>
             </nav>
         </>

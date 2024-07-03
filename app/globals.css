@@ -94,3 +94,39 @@ body,
 aside.EmojiPickerReact > div:last-child {
     display: none !important;
 }
+
+
+.donut-loader {
+    position: relative;
+}
+
+.circle-background, .circle-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.circle-background {
+    background: conic-gradient(gray 0%, gray 100%);
+}
+
+.circle-background2 {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 60%;
+    height: 60%;
+    border-radius: 50%;
+    z-index: 100;
+}
+
+.circle-progress {
+    clip-path: circle(50% at 50%);
+    background: conic-gradient(
+            #208020 calc(var(--percentage) * 1%),
+            transparent calc(var(--percentage) * 1%)
+    );
+}
